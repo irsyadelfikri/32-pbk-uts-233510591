@@ -10,6 +10,9 @@ const addTask = () => {
     newTask.value = ''
   }
 }
+const deleteTask = (index) => {
+  tasks.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -21,6 +24,7 @@ const addTask = () => {
       <li v-for="(task, index) in tasks" :key="index">
         <input type="checkbox" v-model="task.completed" />
         <span :class="{ completed: task.completed }">{{ task.name }}</span>
+        <button @click="deleteTask(index)" class="btn-delete">Batalkan</button>
       </li>
     </ul>
   </main>
