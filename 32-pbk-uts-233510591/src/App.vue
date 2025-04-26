@@ -5,6 +5,8 @@ import HelloWorld from './components/HelloWorld.vue'
 <template>
 <main class="container">
     <h1>Daftar Kegiatan</h1>
+    <input v-model="newTask" placeholder="Tambah kegiatan..." class="input" />
+    <button @click="addTask" class="btn-add">Tambah</button>
   </main>
 </template>
 
