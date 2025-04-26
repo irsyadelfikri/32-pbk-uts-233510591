@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const newTask = ref('')
 const tasks = ref([])
@@ -10,9 +10,19 @@ const addTask = () => {
     newTask.value = ''
   }
 }
+
 const deleteTask = (index) => {
   tasks.value.splice(index, 1)
 }
+
+const showOnlyIncomplete = ref(false)
+
+const filteredTasks = computed(() => {
+  if (showOnlyIncomplete.value) {
+    return tasks.value.filter(task => !task.completed)
+  }
+  return tasks.value
+})
 </script>
 
 <template>
@@ -21,12 +31,15 @@ const deleteTask = (index) => {
     <input v-model="newTask" placeholder="Tambah kegiatan..." class="input" />
     <button @click="addTask" class="btn-add">Tambah</button>
     <ul>
-      <li v-for="(task, index) in tasks" :key="index">
+      <li v-for="(task, index) in filteredTasks" :key="index">
         <input type="checkbox" v-model="task.completed" />
         <span :class="{ completed: task.completed }">{{ task.name }}</span>
         <button @click="deleteTask(index)" class="btn-delete">Batalkan</button>
       </li>
     </ul>
+<div class="filter">
+  <label><input type="checkbox" v-model="showOnlyIncomplete" /> Tampilkan hanya yang belum selesai</label>
+</div>
   </main>
 </template>
 
