@@ -1,5 +1,15 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
+const newTask = ref('')
+const tasks = ref([])
+
+const addTask = () => {
+  if (newTask.value.trim() !== '') {
+    tasks.value.push({ name: newTask.value.trim(), completed: false })
+    newTask.value = ''
+  }
+}
 </script>
 
 <template>
@@ -7,6 +17,9 @@ import HelloWorld from './components/HelloWorld.vue'
     <h1>Daftar Kegiatan</h1>
     <input v-model="newTask" placeholder="Tambah kegiatan..." class="input" />
     <button @click="addTask" class="btn-add">Tambah</button>
+    <ul>
+      <li v-for="(task, index) in tasks" :key="index">{{ task.name }}</li>
+    </ul>
   </main>
 </template>
 
