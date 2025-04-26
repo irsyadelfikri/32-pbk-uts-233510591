@@ -18,7 +18,10 @@ const addTask = () => {
     <input v-model="newTask" placeholder="Tambah kegiatan..." class="input" />
     <button @click="addTask" class="btn-add">Tambah</button>
     <ul>
-      <li v-for="(task, index) in tasks" :key="index">{{ task.name }}</li>
+      <li v-for="(task, index) in tasks" :key="index">
+        <input type="checkbox" v-model="task.completed" />
+        {{ task.name }}
+      </li>
     </ul>
   </main>
 </template>
