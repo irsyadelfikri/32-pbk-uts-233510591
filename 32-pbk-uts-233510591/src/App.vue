@@ -20,7 +20,7 @@ const addTask = () => {
     <ul>
       <li v-for="(task, index) in tasks" :key="index">
         <input type="checkbox" v-model="task.completed" />
-        {{ task.name }}
+        <span :class="{ completed: task.completed }">{{ task.name }}</span>
       </li>
     </ul>
   </main>
@@ -38,5 +38,9 @@ const addTask = () => {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.completed {
+  text-decoration: line-through;
+  color: grey;
 }
 </style>
